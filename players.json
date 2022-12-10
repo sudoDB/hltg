@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Clement",
+    "qui": 10,
+    "feur": 9,
+    "ratio": 8,
+    "l": 7,
+    "totalScore": 34,
+    "undefined": null
+  },
+  {
+    "name": "Bobo",
+    "qui": 70,
+    "feur": 50,
+    "ratio": 40,
+    "l": 50
+  },
+  {
+    "name": "Quentin",
+    "qui": 209,
+    "feur": 1,
+    "ratio": 0,
+    "l": 15,
+    "totalScore": 225
+  },
+  {
+    "name": "Lambda",
+    "qui": 208,
+    "feur": 24,
+    "ratio": 2,
+    "l": 0,
+    "totalScore": 234
+  }
+]

@@ -1,0 +1,158 @@
+
+<!doctype html>
+<html>
+  <head>
+    <!-- Link to the CSS stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Include the Axios library for making AJAX requests -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>HLTG</title>
+  </head>
+
+  <body>
+    <h1>TOP 20 HLTG</h1>
+
+    <!-- Form for adding a new player to the leaderboard -->
+    <form action="/add-player" method="POST">
+      <label for="name">Player Name:</label>
+      <input type="text" id="name" name="name">
+      <button type="submit">Add Player</button>
+    </form>
+
+    <br><br>
+
+    <!-- Table for displaying the current leaderboard -->
+    <table>
+      <tr>
+        <th>Player Name</th>
+        <th>Qui</th>
+        <th>Feur</th>
+        <th>Ratio</th>
+        <th>L</th>
+        <th>Total Score</th>
+      </tr>
+      <!-- Loop through the sorted list of players and display their stats in the table -->
+      <!--
+      <% players.forEach(player => { %>
+        <tr>
+          <td><%= player.name %></td>
+          <td><%= player.qui %></td>
+          <td><%= player.feur %></td>
+          <td><%= player.ratio %></td>
+          <td><%= player.l %></td>
+          <td><%= player.totalScore %></td>
+        </tr>
+      <% }); %>
+      -->
+        <!-- Loop through the sorted list of players and display their stats and action buttons in the table -->
+      <% players.forEach(player => { %>
+        <tr>
+          <td><%= player.name %></td>
+
+          <td>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="qui"
+              data-action="increment"
+              onclick="updateScore(this);"
+            >
+              +
+            </button>
+            <%= player.qui %>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="qui"
+              data-action="decrement"
+              onclick="updateScore(this);"
+            >
+              -
+            </button>
+          </td>
+
+          <td>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="feur"
+              data-action="increment"
+              onclick="updateScore(this);"
+            >
+              +
+            </button>
+            <%= player.feur %>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="feur"
+              data-action="decrement"
+              onclick="updateScore(this);"
+            >
+              -
+            </button>
+          </td>
+
+          <td>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="ratio"
+              data-action="increment"
+              onclick="updateScore(this);"
+            >
+              +
+            </button>
+            <%= player.ratio %>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="ratio"
+              data-action="decrement"
+              onclick="updateScore(this);"
+            >
+              -
+            </button>
+          </td>
+
+          <td>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="l"
+              data-action="increment"
+              onclick="updateScore(this);"
+            >
+              +
+            </button>
+            <%= player.l %>
+            <button
+              data-name="<%= player.name %>"
+              data-stat="l"
+              data-action="decrement"
+              onclick="updateScore(this);"
+            >
+              -
+            </button>
+          </td>
+
+          <td><%= player.totalScore %></td>
+        </tr>
+      <% }); %>
+    </table>
+
+    <!-- Add the updateScore function -->
+    <script>
+      function updateScore(button) {
+        // Get the player ID, stat name, and action from the button's data-* attributes
+        const name = button.dataset.name;
+        const stat = button.dataset.stat;
+        const action = button.dataset.action;
+    
+        // Send a POST request to the /update-score endpoint on the server
+        fetch('/update-score', {
+          method: 'POST',
+          body: JSON.stringify({ name, stat, action }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
+    </script>
+
+  </body>
+</html>
