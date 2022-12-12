@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const {spawn} = require('child_process');
 
 // Set the view engine
 app.set('view engine', 'ejs');
@@ -12,25 +13,25 @@ app.use(express.static(__dirname + './views'));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
+//PYTHON BOT//>
+var process = spawn('python', ['./htltg.py']);
+
+
 // Route for displaying the leaderboard
 app.get('/', (req, res) => {
+  //JSON STATS//>
   // Read the players.json file
   fs.readFile('players.json', 'utf8', (err, data) => {
     if (err) throw err;
 
     // Parse the JSON data
     const players = JSON.parse(data);
-
     // Calculate the total score for each player
     players.forEach(player => {
       player.totalScore = player.qui + player.feur + player.ratio + player.l;
     });
-
     // Sort the players by their total score in descending order
     const sortedPlayers = players.sort((a, b) => b.totalScore - a.totalScore);
-
-    //console.log(sortedPlayers);
-
     // Render the leaderboard page and pass the players data to the template
     res.render('index', { players: sortedPlayers });
   });
