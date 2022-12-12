@@ -19,6 +19,31 @@ var process = spawn('python', ['./htltg.py']);
 
 // Route for displaying the leaderboard
 app.get('/', (req, res) => {
+
+  // Handle auth
+  const reject = () => {
+    res.setHeader("www-authenticate", "Basic");
+    res.sendStatus(401);
+  };
+
+  const authorization = req.headers.authorization;
+
+  if (!authorization) {
+    return reject();
+  }
+
+  const [username, password] = Buffer.from(
+    authorization.replace("Basic ", ""),
+    "base64"
+  )
+    .toString()
+    .split(":");
+
+  // Hardcoded because who cares i dont need a real auth system just keep away the biggest golems
+  if (!(username === "admin" && password === "tgclan420")) {
+    return reject();
+  }
+
   //JSON STATS//>
   // Read the players.json file
   fs.readFile('players.json', 'utf8', (err, data) => {
