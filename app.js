@@ -14,7 +14,7 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 
 //PYTHON BOT//>
-var process = spawn('python', ['./htltg.py']);
+//var process = spawn('python', ['./htltg.py']);
 
 
 // Route for displaying the leaderboard
