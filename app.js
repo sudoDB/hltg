@@ -62,6 +62,30 @@ app.get('/', (req, res) => {
   });
 });
 
+
+// Public page
+// Route for displaying the leaderboard
+app.get('/public', (req, res) => {
+
+  //JSON STATS//>
+  // Read the players.json file
+  fs.readFile('players.json', 'utf8', (err, data) => {
+    if (err) throw err;
+
+    // Parse the JSON data
+    const players = JSON.parse(data);
+    // Calculate the total score for each player
+    players.forEach(player => {
+      player.totalScore = player.qui + player.feur + player.ratio + player.l;
+    });
+    // Sort the players by their total score in descending order
+    const sortedPlayers = players.sort((a, b) => b.totalScore - a.totalScore);
+    // Render the leaderboard page and pass the players data to the template
+    res.render('index2', { players: sortedPlayers });
+  });
+});
+
+
 // Route for handling the form submission when a new player is added to the leaderboard
 app.post('/add-player', (req, res) => {
   // Read the players.json file

@@ -1,0 +1,122 @@
+
+<!doctype html>
+<html>
+  <head>
+    <!-- Link to the CSS stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Include the Axios library for making AJAX requests -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>HLTG</title>
+  </head>
+
+  <body>
+    <h1>TOP 20 HLTG</h1>
+
+    <br><br>
+
+    <div class="row">
+
+      <div class="column">
+        <div id="news">
+          
+          <h1>News:</h1>
+
+          <article>
+            <h2>Ludo la salope</h2>
+            <p>
+              Cette salope n'accepte pas de manger un piment<br>
+              car c'est un gros bb de merde qui chiale a sa mere<br>
+            + il a pas de daron, il a les cheuveux comme xqc<br>
+            </p>
+            <h4>Josh</h4>
+          </article>
+
+          <article>
+            <h2>Liam de nouveau dans la controverse</h2>
+            <p>
+            Suite a des propos misogyne le joueur Franco-Libanais Liam (Le Nettoyeur) Abourousse se retrouve de nouveaux sur la liste noir de G2
+            </p>
+            <h4>Fefe</h4>
+          </article>
+
+          <article>
+            <h2>Clément toujours attendu a 21h47</h2>
+            <p>
+            Le joueur clément toujours attendu alors qu'il a DM de 17h à 20h non-stop.<br>
+            Une étrangeter que peu de monde comprend.
+            </p>
+            <h4>Roro</h4>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Table for displaying the current leaderboard -->
+        <table>
+          <tr>
+            <th>Player Name</th>
+            <th>Qui</th>
+            <th>Feur (Stiti)</th>
+            <th>Ratio</th>
+            <th>L</th>
+            <th>Total Score</th>
+          </tr>
+          <!-- Loop through the sorted list of players and display their stats in the table -->
+          <!--
+          <% players.forEach(player => { %>
+            <tr>
+              <td><%= player.name %></td>
+              <td><%= player.qui %></td>
+              <td><%= player.feur %></td>
+              <td><%= player.ratio %></td>
+              <td><%= player.l %></td>
+              <td><%= player.totalScore %></td>
+            </tr>
+          <% }); %>
+          -->
+            <!-- Loop through the sorted list of players and display their stats and action buttons in the table -->
+          <% players.forEach(player => { %>
+            <tr>
+              <td><%= player.name %></td>
+              <td><%= player.qui %></td>
+              <td><%= player.feur %></td>
+              <td><%= player.ratio %></td>
+              <td><%= player.l %></td>
+              <td><%= player.totalScore %></td>
+            </tr>
+          <% }); %>
+        </table>
+
+        <!-- Auto Update page -->
+        <script>
+          setTimeout(function () { window.location.reload(1); }, 5000);
+        </script>
+      </div>
+
+      <div class="column">
+        <div id="act">
+          <h1>Activité:</h1>
+
+          <article>
+            <h2>Victoire du TG Clan</h2>
+            <h3>16:6</h3>
+          </article>
+
+          <article>
+            <h2>Victoire de GW</h2>
+            <h3>16:11</h3>
+          </article>
+
+          <article>
+            <h2>Défaite du TG Clan</h2>
+            <h3>11:16</h3>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
