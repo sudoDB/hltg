@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const {spawn} = require('child_process');
+const { stringify } = require('querystring');
 
 // Set the view engine
 app.set('view engine', 'ejs');
@@ -117,19 +118,20 @@ app.post('/submit', (req, res) => {
     // Parse the JSON data
     const articles = JSON.parse(data);
 
-    // Format the article data
-    articles.push = ({
+    // Add the new player to the list of players
+    articles.push({
       title: req.body.title,
       author: req.body.author,
       content: req.body.content,
       date: new Date()
     });
 
-      // Save the article to the JSON file
-      fs.writeFile('articles.json', JSON.stringify(article), (err) => {
-        if (err) throw err;
-        console.log('Article saved successfully!');
-        res.redirect('/');
+    // Write the updated list of players back to the players.json file
+    fs.writeFile('articles.json', JSON.stringify(articles), 'utf8', err => {
+      if (err) throw err;
+
+      // Redirect the user back to the leaderboard page
+      res.redirect('/');
     });
   });
 });
