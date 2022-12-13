@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 //var process = spawn('python', ['./htltg.py']);
 
 
-// Route for displaying the leaderboard
-app.get('/', (req, res) => {
+// Route for displaying the admin leaderboard page
+app.get('/admin', (req, res) => {
 
   // Handle auth
   const reject = () => {
@@ -57,15 +57,27 @@ app.get('/', (req, res) => {
     });
     // Sort the players by their total score in descending order
     const sortedPlayers = players.sort((a, b) => b.totalScore - a.totalScore);
-    // Render the leaderboard page and pass the players data to the template
-    res.render('index', { players: sortedPlayers });
+
+    // Now get the articles
+    // Read the articles.json file
+    fs.readFile('articles.json', (err, data) => {
+      if (err) throw err;
+
+      // Parse the JSON data and pass the list of articles to the view
+      const articles = JSON.parse(data);
+
+      // Render the leaderboard page and pass the players data and custom articles to the template
+      res.render('index', { players: sortedPlayers, articles: articles });
+    });
+
+    
   });
 });
 
 
 // Public page
-// Route for displaying the leaderboard
-app.get('/public', (req, res) => {
+// Route for displaying the public leaderboard
+app.get('/', (req, res) => {
 
   //JSON STATS//>
   // Read the players.json file
@@ -80,9 +92,39 @@ app.get('/public', (req, res) => {
     });
     // Sort the players by their total score in descending order
     const sortedPlayers = players.sort((a, b) => b.totalScore - a.totalScore);
-    // Render the leaderboard page and pass the players data to the template
-    res.render('index2', { players: sortedPlayers });
+
+    // Now get the articles
+    // Read the articles.json file
+    fs.readFile('articles.json', (err, data) => {
+      if (err) throw err;
+
+      // Parse the JSON data and pass the list of articles to the view
+      const articles = JSON.parse(data);
+
+      // Render the leaderboard page and pass the players data and custom articles to the template
+      res.render('index2', { players: sortedPlayers, articles: articles });
+    });
   });
+});
+
+
+// Route for handling the form submission for new articles
+app.post('/submit', (req, res) => {
+  // Format the article data
+  const article = {
+    title: req.body.title,
+    author: req.body.author,
+    content: req.body.content,
+    date: new Date()
+  };
+
+  // Save the article to the JSON file
+  fs.writeFile('articles.json', JSON.stringify(article), (err) => {
+    if (err) throw err;
+    console.log('Article saved successfully!');
+  });
+
+  res.redirect('/');
 });
 
 

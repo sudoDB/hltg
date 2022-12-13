@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Include the Axios library for making AJAX requests -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
     <title>HLTG</title>
   </head>
@@ -22,6 +23,22 @@
           
           <h1>News:</h1>
 
+          <!--Display all customs aticles-->
+          <% if (articles.length > 0) { %>
+            <% articles.forEach((article) => { %>
+              <article>
+                <h2><%= article.title %></h2>
+                <p><%= article.content %></p>
+                <p>
+                  <h4><%= article.author %></h4>
+                </p>
+              </article>
+            <% }); %>
+          <% } else { %>
+            <p>No articles found.</p>
+          <% } %>
+
+<!-- Hard coded old articles
           <article>
             <h2>Ludo la salope</h2>
             <p>
@@ -35,7 +52,7 @@
           <article>
             <h2>Liam de nouveau dans la controverse</h2>
             <p>
-            Suite a des propos mysogine le joueur Franco-Libanais Liam (Le Nettoyeur) Abourousse se retrouve de nouveau sur la liste noire de G2
+              Suite a des propos mysogine le joueur Franco-Libanais Liam (Le Nettoyeur) Abourousse se retrouve de nouveau sur la liste noire de G2
             </p>
             <h4>Fefe</h4>
           </article>
@@ -56,6 +73,26 @@
             Apres tant d'années pourra t-il trouver le courage de demander ?
             </p>
             <h4>Harun</h4>
+          </article>
+-->
+
+          <article>
+            <h2>Poster un article</h2>
+            <form method="POST" action="/submit">
+              <div>
+                <label>Titre:</label>
+                <input style="max-width:fit-content" type="text" name="title" />
+              </div>
+              <div>
+                <label>Auteur:</label>
+                <input style="max-width:fit-content" type="text" name="author" />
+              </div>
+              <div>
+                <label>Contenu:</label>
+                <textarea rows="10" cols="31" name="content"></textarea>
+              </div>
+              <button type="submit">Envoyer</button>
+            </form>
           </article>
 
         </div>
@@ -100,7 +137,13 @@
 
         <!-- Auto Update page -->
         <script>
-          setTimeout(function () { window.location.reload(1); }, 5000);
+          //setTimeout(function () { window.location.reload(1); }, 5000);
+          // Reload score content every 2s
+          $(document).ready(function(){
+            setInterval(function(){
+                  $("#score").load(window.location.href + " #score" );
+            }, 2000);
+            });
         </script>
       </div>
 

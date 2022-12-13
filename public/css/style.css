@@ -18,13 +18,13 @@ body{
   float: left;
   width: 33.33%;
   align-content: center;
-  display: table;
+  display: table-column;
 }
 
 /* Clear floats after the columns */
 .row:after {
   content: "";
-  display: table;
+  display: table-row;
   clear: both;
 }
 
@@ -44,6 +44,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 75%;
 }
   
 label {
@@ -94,15 +95,16 @@ tr:nth-child(even) {
 
 /* Fake article */
 #news{
-  margin-left: 75px;
-  margin-right: 75px;
+  margin-left: 45px;
+  margin-right: 45px;
   border: 1px solid #2d3844;
   
 }
 
+
 #act{
-  margin-left: 75px;
-  margin-right: 75px;
+  margin-left: 45px;
+  margin-right: 45px;
   border: 1px solid #2d3844;
 }
 
