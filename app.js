@@ -123,7 +123,7 @@ app.post('/submit', (req, res) => {
       title: req.body.title,
       author: req.body.author,
       content: req.body.content,
-      date: new Date()
+      date: new Date().toLocaleDateString()
     });
 
     // Write the updated list of players back to the players.json file
