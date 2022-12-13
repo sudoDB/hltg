@@ -116,21 +116,22 @@ app.post('/submit', (req, res) => {
 
     // Parse the JSON data
     const articles = JSON.parse(data);
+
     // Format the article data
-    articles.push = {
+    articles.push = ({
       title: req.body.title,
       author: req.body.author,
       content: req.body.content,
       date: new Date()
     });
 
-  // Save the article to the JSON file
-  fs.writeFile('articles.json', JSON.stringify(article), (err) => {
-    if (err) throw err;
-    console.log('Article saved successfully!');
+      // Save the article to the JSON file
+      fs.writeFile('articles.json', JSON.stringify(article), (err) => {
+        if (err) throw err;
+        console.log('Article saved successfully!');
+        res.redirect('/');
+    });
   });
-
-  res.redirect('/');
 });
 
 
