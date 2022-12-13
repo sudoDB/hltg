@@ -122,7 +122,7 @@ app.post('/submit', (req, res) => {
       author: req.body.author,
       content: req.body.content,
       date: new Date()
-    };
+    });
 
   // Save the article to the JSON file
   fs.writeFile('articles.json', JSON.stringify(article), (err) => {
