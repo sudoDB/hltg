@@ -110,13 +110,19 @@ app.get('/', (req, res) => {
 
 // Route for handling the form submission for new articles
 app.post('/submit', (req, res) => {
-  // Format the article data
-  const article = {
-    title: req.body.title,
-    author: req.body.author,
-    content: req.body.content,
-    date: new Date()
-  };
+  // Read the players.json file
+  fs.readFile('players.json', 'utf8', (err, data) => {
+    if (err) throw err;
+
+    // Parse the JSON data
+    const articles = JSON.parse(data);
+    // Format the article data
+    articles.push = {
+      title: req.body.title,
+      author: req.body.author,
+      content: req.body.content,
+      date: new Date()
+    };
 
   // Save the article to the JSON file
   fs.writeFile('articles.json', JSON.stringify(article), (err) => {
