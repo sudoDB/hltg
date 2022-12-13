@@ -111,7 +111,7 @@ app.get('/', (req, res) => {
 // Route for handling the form submission for new articles
 app.post('/submit', (req, res) => {
   // Read the players.json file
-  fs.readFile('players.json', 'utf8', (err, data) => {
+  fs.readFile('articles.json', 'utf8', (err, data) => {
     if (err) throw err;
 
     // Parse the JSON data
