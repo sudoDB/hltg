@@ -77,7 +77,7 @@ async def hltg(ctx, player_name: str):
             embed.add_field(name=name, value=f'qui: {qui}\nfeur: {feur}\nratio: {ratio}\nl: {l}\ntotal score: {total_score}')
             break
 
-    await ctx.send(embed=embed)    
+    await ctx.send(embed=embed)
 
 """
 @client.command(aliases=["hltg+", "+"])
