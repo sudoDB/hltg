@@ -23,8 +23,8 @@ async def aide(ctx):
     commands = {
         "aide": "Affiche tout les commande",
         "vote <question>": "Lance un vote qui s'arrete a 4 votes pour la meme réponse",
-        "hltg_all": "Affiche tout les joueurs HTLTG et leur stats **DESACTIVER**",
-        "hltg <nom>": "Affiche un joueur HTLTG et ces stats **DESACTIVER**",
+        "hltg_all": "Affiche tout les joueurs HTLTG et leur stats",
+        "hltg <nom>": "Affiche un joueur HTLTG et ces stats",
         "hltg+ | + <nom> <catégorie>": "Augmente d'un le score de la catégorie définie **DESACTIVER**",
         "hltg- | - <nom> <catégorie>": "Augmente d'un le score de la catégorie définie **DESACTIVER**"
     }
@@ -37,7 +37,7 @@ async def aide(ctx):
     # Send the message to the channel where the command was invoked
     await ctx.send(message)
 
-"""
+
 # Command to show all players
 @client.command()
 async def hltg_all(ctx):
@@ -79,7 +79,7 @@ async def hltg(ctx, player_name: str):
 
     await ctx.send(embed=embed)    
 
-
+"""
 @client.command(aliases=["hltg+", "+"])
 async def hltg_increase_score(ctx, player_name: str, score_name: str):
     with open('players.json', 'r') as f:
