@@ -22,10 +22,11 @@ async def aide(ctx):
     # Define a list of commands and their descriptions
     commands = {
         "aide": "Affiche tout les commande",
-        "hltg_all": "Affiche tout les joueurs HTLTG et leur stats",
-        "hltg <nom>": "Affiche un joueur HTLTG et ces stats",
-        "hltg+ | + <nom> <catégorie>": "Augmente d'un le score de la catégorie définie",
-        "hltg- | - <nom> <catégorie>": "Augmente d'un le score de la catégorie définie"
+        "vote <question>": "Lance un vote qui s'arrete a 4 votes pour la meme réponse",
+        "hltg_all": "Affiche tout les joueurs HTLTG et leur stats **DESACTIVER**",
+        "hltg <nom>": "Affiche un joueur HTLTG et ces stats **DESACTIVER**",
+        "hltg+ | + <nom> <catégorie>": "Augmente d'un le score de la catégorie définie **DESACTIVER**",
+        "hltg- | - <nom> <catégorie>": "Augmente d'un le score de la catégorie définie **DESACTIVER**"
     }
 
     # Create a message with the list of commands and their descriptions
@@ -36,7 +37,7 @@ async def aide(ctx):
     # Send the message to the channel where the command was invoked
     await ctx.send(message)
 
-
+"""
 # Command to show all players
 @client.command()
 async def hltg_all(ctx):
@@ -111,6 +112,43 @@ async def hltg_decrease_score(ctx, player_name: str, score_name: str):
         json.dump(player_scores, f)
 
     await ctx.send(f'{player_name}\'s {score_name} score has been decreased by 1')
+"""
+
+@client.command(aliases=["vote"])
+async def poll(ctx, *, question):
+
+    # Create the poll message and add yes/no reactions
+    poll_message = await ctx.send(f"Vote: {question} (Oui/Non)")
+    await poll_message.add_reaction("✅")
+    await poll_message.add_reaction("❌")
+    # Create variables to store the number of yes/no votes
+    yes_votes = 0
+    no_votes = 0
+
+    # Create a while loop that continues until the poll is ended
+    while True:
+        # Wait for a reaction to be added to the poll message
+        reaction, user = await client.wait_for("reaction_add")
+
+        # If the reaction is a "✅" (yes), increment the yes_votes variable
+        if reaction.emoji == "✅":
+            yes_votes += 1
+
+        # If the reaction is a "❌" (no), increment the no_votes variable
+        elif reaction.emoji == "❌":
+            no_votes += 1
+
+        # If either of the votes reaches 4, break out of the while loop
+        if yes_votes == 4 or no_votes == 4:
+            break
+
+    # Send the result of the poll to the channel
+    if yes_votes > no_votes:
+        await ctx.send(f"Fin du vote. Le oui l'emporte. '{question}'")
+    elif yes_votes < no_votes:
+        await ctx.send(f"Fin du vote. Le non l'emporte. '{question}'")
+    else:
+        await ctx.send(f"Fin du vote. Egalité. '{question}'")
 
 
 client.run(token)
