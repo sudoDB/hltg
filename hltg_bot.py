@@ -144,7 +144,8 @@ async def poll(ctx, *, question):
 
     # Send the result of the poll to the channel
     if yes_votes > no_votes:
-        await ctx.send(f"Fin du vote. Le oui l'emporte. '{question}'  <@!Lambda01>")
+        user = discord.utils.get(client.users, name="Lambda01", discriminator="9929")
+        await ctx.send(f"Fin du vote. Le oui l'emporte. '{question}'  {user.mention}")
     elif yes_votes < no_votes:
         await ctx.send(f"Fin du vote. Le non l'emporte. '{question}'")
     else:
