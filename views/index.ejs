@@ -30,60 +30,24 @@
           
           <h1>News:</h1>
 
-          <!--Display all customs aticles-->
-          <% if (articles.length > 0) { %>
-            <% articles.reverse().forEach((article) => { %>
-              <article>
-                <h2><%= article.title %></h2>
-                <p><%= article.content %></p>
-                <p>
-                  <h4><%= article.author %></h4>
-                  <h5><%= article.date %></h5>
-                </p>
-              </article>
-            <% }); %>
-          <% } else { %>
-            <p>No articles found.</p>
-          <% } %>
+          <div class="scrolling" id="news" style="margin-left:20px; margin-right: 20px;">
+            <!--Display all customs aticles-->
+            <% if (articles.length > 0) { %>
+              <% articles.reverse().forEach((article) => { %>
+                <article>
+                  <h2><%= article.title %></h2>
+                  <p><%= article.content %></p>
+                  <p>
+                    <h4><%= article.author %></h4>
+                    <h5><%= article.date %></h5>
+                  </p>
+                </article>
+              <% }); %>
+            <% } else { %>
+              <p>No articles found.</p>
+            <% } %>
+          </div>
 
-<!-- Hard coded old articles
-          <article>
-            <h2>Ludo la salope</h2>
-            <p>
-              Cette salope n'accepte pas de manger un piment<br>
-              car c'est un gros bb de merde qui chiale a sa mere<br>
-            + il a pas de daron, il a les cheuveux comme xqc<br>
-            </p>
-            <h4>Josh</h4>
-          </article>
-
-          <article>
-            <h2>Liam de nouveau dans la controverse</h2>
-            <p>
-              Suite a des propos mysogine le joueur Franco-Libanais Liam (Le Nettoyeur) Abourousse se retrouve de nouveau sur la liste noire de G2
-            </p>
-            <h4>Fefe</h4>
-          </article>
-
-          <article>
-            <h2>Clément toujours attendu a 21h47</h2>
-            <p>
-            Le joueur clément toujours attendu alors qu'il a DM de 17h à 20h non-stop.<br>
-            Une étrangeter que peu de monde comprend.
-            </p>
-            <h4>Roro</h4>
-          </article>
-
-          <article>
-            <h2>Oui, l'heure ou Fefe mange. Le mystere complet</h2>
-            <p>
-            Tout le TG Clan se demande actuellement quand est ce que Fefe mangera t-il aujourd'hui<br>
-            Apres tant d'années pourra t-il trouver le courage de demander ?
-            </p>
-            <h4>Harun</h4>
-          </article>
--->
-          
           <article>
             <h2>Poster un article</h2>
             <form method="POST" action="/submit">

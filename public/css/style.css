@@ -101,6 +101,11 @@ tr:nth-child(even) {
   
 }
 
+.scrolling{
+  overflow: auto;
+  max-height: 500px;
+}
+
 
 #act{
   margin-left: 45px;
